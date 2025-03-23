@@ -251,6 +251,8 @@ GEM
       rubocop (>= 1.72)
       rubocop-performance (>= 1.24)
       rubocop-rails (>= 2.30)
+    rubocop-shopify (2.16.0)
+      rubocop (~> 1.62)
     ruby-progressbar (1.13.0)
     securerandom (0.4.1)
     solid_cable (3.0.7)
@@ -315,6 +317,7 @@ DEPENDENCIES
   puma (>= 5.0)
   rails (~> 8.0.1)
   rubocop-rails-omakase
+  rubocop-shopify
   solid_cable
   solid_cache
   solid_queue
