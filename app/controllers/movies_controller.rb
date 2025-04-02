@@ -26,8 +26,13 @@ class MoviesController < ApplicationController
 
   # PATCH/PUT /movies/1
   def update
+    if params[:movie][:genre_ids].present? && !valid_genres?
+      render json: { error: "One or more genres do not exist" }, status: :unprocessable_entity
+      return
+    end
+
     if @movie.update(movie_params)
-      render json: @movie
+      render :show, status: :ok
     else
       render json: @movie.errors, status: :unprocessable_entity
     end
@@ -41,11 +46,16 @@ class MoviesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_movie
-      @movie = Movie.find(params.expect(:id))
+      @movie = Movie.find(params.require(:id))
     end
 
     # Only allow a list of trusted parameters through.
     def movie_params
-      params.expect(movie: [ :title, :description, :poster_image_url ])
+      params.require(:movie).permit(:title, :description, :poster_image_url, genre_ids: [])
+    end
+
+    def valid_genres?
+      genre_ids = params[:movie][:genre_ids]
+      Genre.where(id: genre_ids).count == genre_ids.count
     end
 end
