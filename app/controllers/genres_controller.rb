@@ -1,4 +1,5 @@
 class GenresController < ApplicationController
+  include Authenticatable
   before_action :set_movie_genre, only: %i[ show update destroy ]
 
   # GET /genres

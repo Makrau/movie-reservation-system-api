@@ -4,6 +4,11 @@ Rails.application.routes.draw do
   defaults format: :json do
     resources :genres
     resources :movies
+
+    # Public routes that don't require authentication
+    namespace :public do
+      resources :movies, only: [:index, :show]
+    end
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

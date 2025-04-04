@@ -1,4 +1,5 @@
 class MoviesController < ApplicationController
+  include Authenticatable
   before_action :set_movie, only: %i[ show update destroy ]
 
   # GET /movies
