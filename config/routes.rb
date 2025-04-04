@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  post '/auth/login', to: 'authentication#login'
+
   defaults format: :json do
     resources :genres
     resources :movies
