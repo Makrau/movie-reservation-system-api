@@ -10,7 +10,7 @@ module Public
 
     # GET /public/movies/1
     def show
-      render json: @movie
+      render :show, status: :ok
     end
 
     private

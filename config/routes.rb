@@ -3,11 +3,16 @@ Rails.application.routes.draw do
 
   defaults format: :json do
     resources :genres
-    resources :movies
 
     # Public routes that don't require authentication
     namespace :public do
       resources :movies, only: [:index, :show]
+    end
+
+    # Admin routes that require admin privileges
+    namespace :admin do
+      post '/auth/login', to: 'authentication#login'
+      resources :movies
     end
   end
 
