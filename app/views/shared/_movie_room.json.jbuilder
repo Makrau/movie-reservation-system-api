@@ -1,0 +1,1 @@
+json.extract! movie_room, :id, :number, :total_seats, :created_at, :updated_at 

@@ -1,0 +1,1 @@
+json.partial! "shared/movie_room", movie_room: @movie_room 

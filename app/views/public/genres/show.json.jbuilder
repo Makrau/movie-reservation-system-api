@@ -1,0 +1,1 @@
+json.partial! "shared/genre", genre: @genre 
