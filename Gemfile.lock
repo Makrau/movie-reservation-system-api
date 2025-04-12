@@ -184,6 +184,10 @@ GEM
     raabro (1.4.0)
     racc (1.8.1)
     rack (3.1.11)
+    rack-attack (6.7.0)
+      rack (>= 1.0, < 4)
+    rack-cors (2.0.2)
+      rack (>= 2.0.0)
     rack-session (2.1.0)
       base64 (>= 0.1.0)
       rack (>= 3.0.0)
@@ -257,6 +261,7 @@ GEM
     rubocop-shopify (2.16.0)
       rubocop (~> 1.62)
     ruby-progressbar (1.13.0)
+    secure_headers (7.1.0)
     securerandom (0.4.1)
     solid_cable (3.0.7)
       actioncable (>= 7.2)
@@ -320,9 +325,12 @@ DEPENDENCIES
   kamal
   pg
   puma (>= 5.0)
+  rack-attack
+  rack-cors
   rails (~> 8.0.1)
   rubocop-rails-omakase
   rubocop-shopify
+  secure_headers
   solid_cable
   solid_cache
   solid_queue

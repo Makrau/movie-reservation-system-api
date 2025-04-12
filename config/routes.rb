@@ -1,20 +1,26 @@
 Rails.application.routes.draw do
-  post '/auth/login', to: 'authentication#login'
+  post "/auth/login", to: "authentication#login"
 
   defaults format: :json do
     # Public routes that don't require authentication
     namespace :public do
-      resources :movies, only: [:index, :show]
-      resources :genres, only: [:index, :show]
+      resources :movies, only: [ :index, :show ]
+      resources :genres, only: [ :index, :show ]
+      resources :showtimes, only: [ :index, :show ]
     end
 
     # Admin routes that require admin privileges
     namespace :admin do
-      post '/auth/login', to: 'authentication#login'
+      post "/auth/login", to: "authentication#login"
       resources :movies
       resources :genres
       resources :movie_rooms
+      resources :showtimes
     end
+  end
+
+  resources :showtimes, only: [ :index, :show ] do
+    resources :reservations, only: [ :index, :show, :create, :destroy ]
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
