@@ -1,11 +1,10 @@
 class GenresController < ApplicationController
   include Authenticatable
-  before_action :set_movie_genre, only: %i[ show update destroy ]
+  before_action :set_movie_genre, only: [ :show ]
 
   # GET /genres
   def index
     @genres = Genre.all
-
     render json: @genres
   end
 
@@ -14,39 +13,10 @@ class GenresController < ApplicationController
     render json: @movie_genre
   end
 
-  # POST /genres
-  def create
-    @movie_genre = Genre.new(movie_genre_params)
-
-    if @movie_genre.save
-      render json: @movie_genre, status: :created, location: @movie_genre
-    else
-      render json: @movie_genre.errors, status: :unprocessable_entity
-    end
-  end
-
-  # PATCH/PUT /genres/1
-  def update
-    if @movie_genre.update(movie_genre_params)
-      render json: @movie_genre
-    else
-      render json: @movie_genre.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /genres/1
-  def destroy
-    @movie_genre.destroy!
-  end
-
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_movie_genre
-      @movie_genre = Genre.find(params.expect(:id))
-    end
-
-    # Only allow a list of trusted parameters through.
-    def movie_genre_params
-      params.expect(movie_genre: [ :genre ])
+      @movie_genre = Genre.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      render json: { error: "Genre not found" }, status: :not_found
     end
 end

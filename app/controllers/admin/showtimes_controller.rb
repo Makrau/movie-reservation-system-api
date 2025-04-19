@@ -1,9 +1,9 @@
 module Admin
   class ShowtimesController < BaseController
-    before_action :set_showtime, only: [:show, :update, :destroy]
+    before_action :set_showtime, only: [ :show, :update, :destroy ]
 
     def index
-      @showtimes = Showtime.all
+      @showtimes = params[:movie_id].present? ? Showtime.where(movie_id: params[:movie_id]) : Showtime.all
     end
 
     def show
@@ -37,11 +37,11 @@ module Admin
     def set_showtime
       @showtime = Showtime.find(params[:id])
     rescue ActiveRecord::RecordNotFound
-      render json: { error: 'Showtime not found' }, status: :not_found
+      render json: { error: "Showtime not found" }, status: :not_found
     end
 
     def showtime_params
       params.require(:showtime).permit(:movie_id, :movie_room_id, :start_time, :end_time)
     end
   end
-end 
+end
