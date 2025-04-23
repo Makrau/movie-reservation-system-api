@@ -1,0 +1,1 @@
+- always generate code with lf as end-of-line
