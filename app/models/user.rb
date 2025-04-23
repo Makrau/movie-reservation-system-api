@@ -1,11 +1,19 @@
 class User < ApplicationRecord
   has_secure_password
   has_many :reservations, dependent: :destroy
+  has_many :showtimes, through: :reservations
 
   validates :email, presence: true, uniqueness: true,
                    format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, presence: true, on: :create
   validate :password_complexity
+
+  def watched_movies
+    Movie.joins(showtimes: :reservations)
+         .where(reservations: { user_id: id })
+         .where("showtimes.start_time < ?", Time.current)
+         .distinct
+  end
 
   private
 

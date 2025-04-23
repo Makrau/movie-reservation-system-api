@@ -8,6 +8,11 @@ class ReservationsController < ApplicationController
     @reservations = current_user.reservations
   end
 
+  def watched_movies
+    @movies = current_user.watched_movies
+    render "public/movies/index"
+  end
+
   def show
   end
 

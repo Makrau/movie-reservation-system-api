@@ -8,6 +8,6 @@ class CreateReservations < ActiveRecord::Migration[8.0]
       t.timestamps
     end
 
-    add_index :reservations, [:showtime_id, :seat_number], unique: true
+    add_index :reservations, [ :showtime_id, :seat_number ], unique: true
   end
 end
